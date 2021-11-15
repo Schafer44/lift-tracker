@@ -1,10 +1,10 @@
 <template>
   <AddDay v-show="showAddDay" @add-day="addDay" />
-  <!--<Week
+  <Week
     @toggle-complete="toggleComplete"
     @delete-day="deleteDay"
     :week="week"
-  />-->
+  />
 </template>
 
 <script>
