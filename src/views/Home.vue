@@ -1,8 +1,10 @@
 <template>
   <AddDay v-show="showAddDay" @add-day="addDay" />
   <Week
-    @toggle-complete="toggleComplete"
+    @toggle-complete-day="toggleCompleteDay"
     @delete-day="deleteDay"
+    @toggle-complete="toggleComplete"
+    @delete-lift="deleteLift"
     :week="week"
   />
 </template>
@@ -70,10 +72,12 @@ export default {
           : alert("Error deleting lift");
       }
     },
-    async toggleComplete(id, dayid) {
+    async toggleComplete(id, parentId) {
+      console.log(dayid);
+      console.log(id);
       const LiftToToggle = await this.fetchLift(id);
       const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
-      const res = await fetch(`api/week/${id}`, {
+      const res = await fetch(`api/week/${parentId}/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

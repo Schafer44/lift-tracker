@@ -7,13 +7,15 @@
       "day": [
         {
           "id": 1,
-          "text": "Meeting at School",
-          "Complete": false
+          "text": "Bench",
+          "Complete": false,
+          "parentId": 1
         },
         {
           "id": 3,
-          "text": "Food Shopping",
-          "Complete": false
+          "text": "Reverse Grip",
+          "Complete": false,
+          "parentId": 1
         }
       ]
     },
@@ -24,13 +26,15 @@
       "day": [
         {
           "id": 1,
-          "text": "Meeting at School",
-          "Complete": false
+          "text": "Hammer Curls",
+          "Complete": false,
+          "parentId": 2
         },
         {
           "id": 3,
-          "text": "Food Shopping",
-          "Complete": false
+          "text": "Preacher Curls",
+          "Complete": false,
+          "parentId": 2
         }
       ]
     },
@@ -41,13 +45,15 @@
       "day": [
         {
           "id": 1,
-          "text": "Meeting at School",
-          "Complete": false
+          "text": "Bent Over Row",
+          "Complete": false,
+          "parentId": 3
         },
         {
           "id": 3,
-          "text": "Food Shopping",
-          "Complete": false
+          "text": "Tri-Rope",
+          "Complete": false,
+          "parentId": 3
         }
       ]
     }

@@ -1,13 +1,17 @@
 <template>
   <div
-    @dblclick="$emit('toggle-complete', lift.id)"
+    @dblclick="$emit('toggle-complete', lift.id, lift.parentId)"
     :class="[lift.complete ? 'complete' : '', 'lift']"
   >
     <h3>
       {{ lift.text }}
-      <i @click="$emit('delete-lift', lift.id)" class="fas fa-times"></i>
+      {{ lift.parentId }}
+      <i
+        @click="$emit('delete-lift', lift.id, lift.parentId)"
+        class="fas fa-times"
+        >X</i
+      >
     </h3>
-    <p>this is a lift</p>
   </div>
 </template>
 
