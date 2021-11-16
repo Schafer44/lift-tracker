@@ -1,61 +1,60 @@
 {
+  "lifts": [
+    {
+      "id": 1,
+      "text": "Bench",
+      "complete": false,
+      "parentId": 1
+    },
+    {
+      "id": 2,
+      "text": "Reverse Grip",
+      "complete": false,
+      "parentId": 1
+    },
+    {
+      "id": 3,
+      "text": "Hammer Curls",
+      "complete": false,
+      "parentId": 2
+    },
+    {
+      "id": 4,
+      "text": "Preacher Curls",
+      "complete": false,
+      "parentId": 2
+    },
+    {
+      "id": 5,
+      "text": "Hammer",
+      "complete": false,
+      "parentId": 3
+    },
+    {
+      "id": 6,
+      "text": " Curls",
+      "complete": false,
+      "parentId": 3
+    }
+  ],
   "week": [
     {
-      "complete": false,
       "id": 1,
+      "complete": true,
       "text": "Day 1",
-      "day": [
-        {
-          "id": 1,
-          "text": "Bench",
-          "Complete": false,
-          "parentId": 1
-        },
-        {
-          "id": 3,
-          "text": "Reverse Grip",
-          "Complete": false,
-          "parentId": 1
-        }
-      ]
+      "dayId": 1
     },
     {
-      "complete": false,
       "id": 2,
+      "complete": false,
       "text": "Day 2",
-      "day": [
-        {
-          "id": 1,
-          "text": "Hammer Curls",
-          "Complete": false,
-          "parentId": 2
-        },
-        {
-          "id": 3,
-          "text": "Preacher Curls",
-          "Complete": false,
-          "parentId": 2
-        }
-      ]
+      "dayId": 2
     },
     {
-      "complete": false,
       "id": 3,
+      "complete": false,
       "text": "Day 3",
-      "day": [
-        {
-          "id": 1,
-          "text": "Bent Over Row",
-          "Complete": false,
-          "parentId": 3
-        },
-        {
-          "id": 3,
-          "text": "Tri-Rope",
-          "Complete": false,
-          "parentId": 3
-        }
-      ]
+      "dayId": 3
     }
   ]
 }

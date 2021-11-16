@@ -6,6 +6,7 @@
     @toggle-complete="toggleComplete"
     @delete-lift="deleteLift"
     :week="week"
+    :lifts="lifts"
   />
 </template>
 
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       week: [],
+      lifts: [],
     };
   },
   methods: {
@@ -73,11 +75,16 @@ export default {
       }
     },
     async toggleComplete(id, parentId) {
-      console.log(dayid);
+      console.log(parentId);
       console.log(id);
-      const LiftToToggle = await this.fetchLift(id);
+      id = 1;
+      parentId = 1;
+      console.log(parentId);
+      console.log(id);
+      const LiftToToggle = await this.fetchLift(id, parentId);
       const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
-      const res = await fetch(`api/week/${parentId}/${id}`, {
+      var string = `api/week/${parentId}/`;
+      var res = await fetch(string + id, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -85,7 +92,7 @@ export default {
         body: JSON.stringify(updLift),
       });
       const data = await res.json();
-      this.day = this.day.map(
+      this.week[parentId].day = this.week[parentId].day.map(
         (lift) => (lift.id === id ? { ...lift, complete: data.complete } : lift) // will tak more work
       );
     },
@@ -109,19 +116,31 @@ export default {
       const data = await res.json();
       return data;
     },
-    async fetchDay(id) {
-      const res = await fetch(`api/week/${id}`);
+    async fetchLifts() {
+      const res = await fetch("api/lifts");
       const data = await res.json();
       return data;
     },
-    async fetchLift(id) {
-      const res = await fetch(`api/week/${id}/${id}`); // this will need work
+    async fetchDay(id) {
+      console.log(id);
+      const res = await fetch(`api/week/${id}`);
       const data = await res.json();
+      console.log(data);
       return data;
+    },
+    async fetchLift(id, dayid) {
+      const res = await fetch(`api/${dayid}/${id}`);
+      const tempData = await res.json();
+      const currentDay = tempData.day[id];
+      console.log(currentDay);
+      /*const res = await fetch(`api/week/${dayid}/${id}`); // this will need work
+      const data = await res.json();*/
+      return currentDay;
     },
   },
   async created() {
     this.week = await this.fetchWeek();
+    this.lifts = await this.fetchLifts();
   },
 };
 </script>
