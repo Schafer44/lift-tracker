@@ -32,7 +32,7 @@
     },
     {
       "id": 6,
-      "text": " Curls",
+      "text": "Curls",
       "complete": false,
       "parentId": 3
     }
@@ -40,7 +40,7 @@
   "week": [
     {
       "id": 1,
-      "complete": true,
+      "complete": false,
       "text": "Day 1",
       "dayId": 1
     },

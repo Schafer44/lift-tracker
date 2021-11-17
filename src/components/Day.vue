@@ -5,22 +5,13 @@
   >
     <h3>
       {{ day.text }}
-      <i @click="$emit('delete-day', day.id)" class="fas fa-times">X</i>
     </h3>
   </div>
-
-  {{ log(day.id) }}
   <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
-    {{ log(day.id) }}
-    {{ log(JSON.parse(JSON.stringify(lifts[lift.id - 1]))) }}
     <div
       v-if="day.id === JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))"
     >
-      <Lift
-        @toggle-complete="$emit('toggle-complete', lift.id, lift.parentId)"
-        @delete-lift="$emit('delete-lift', lift.id, lift.parentId)"
-        :lift="lift"
-      />
+      <Lift @toggle-complete="$emit('toggle-complete', lift.id)" :lift="lift" />
     </div>
   </div>
 </template>
@@ -32,11 +23,6 @@ export default {
   props: {
     day: Object,
     lifts: Array,
-  },
-  methods: {
-    log(msg) {
-      console.log(msg);
-    },
   },
   /*mounted() {
     if (this.day.dayId <= 1) this.fetchDay(this.day.dayId);
@@ -54,17 +40,13 @@ export default {
   data() {
     return {
       lift: [],
+      lift: Object,
     };
   },
   components: {
     Lift,
   },
-  emits: [
-    "delete-day",
-    "toggle-complete",
-    "toggle-complete-day",
-    "delete-lift",
-  ],
+  emits: ["toggle-complete", "toggle-complete-day"],
 };
 </script>
 

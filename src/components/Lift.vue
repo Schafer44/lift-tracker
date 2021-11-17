@@ -1,16 +1,12 @@
 <template>
   <div
-    @dblclick="$emit('toggle-complete', lift.id, lift.parentId)"
+    :key="componentKey"
+    @click="forceRerender"
+    @dblclick="$emit('toggle-complete', lift.id)"
     :class="[lift.complete ? 'complete' : '', 'lift']"
   >
     <h3>
       {{ lift.text }}
-      {{ lift.parentId }}
-      <i
-        @click="$emit('delete-lift', lift.id, lift.parentId)"
-        class="fas fa-times"
-        >X</i
-      >
     </h3>
   </div>
 </template>
@@ -21,20 +17,29 @@ export default {
   props: {
     lift: Object,
   },
+  data() {
+    return {
+      componentKey: 0,
+    };
+  },
+  methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
+  },
+  emits: ["toggle-complete", "toggle-complete-day", "toggleComplete"],
 };
 </script>
 
 <style scope>
-.fas {
-  color: red;
-}
-.lask {
+.lift {
   background: #f4f4f4;
   margin: 5px;
+  margin-left: 40px;
   padding: 10px 20px;
   cursor: pointer;
 }
-.lask.complete {
+.lift.complete {
   border-left: 5px solid green;
 }
 .lift h3 {
