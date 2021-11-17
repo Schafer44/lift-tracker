@@ -3,7 +3,7 @@
     {
       "id": 1,
       "text": "Bench",
-      "complete": false,
+      "complete": true,
       "parentId": 1
     },
     {
@@ -40,7 +40,7 @@
   "week": [
     {
       "id": 1,
-      "complete": false,
+      "complete": true,
       "text": "Day 1",
       "dayId": 1
     },

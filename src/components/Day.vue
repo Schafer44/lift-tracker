@@ -7,22 +7,13 @@
       {{ day.text }}
     </h3>
   </div>
-  <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
-    <div
-      v-if="day.id === JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))"
-    >
-      <Lift @toggle-complete="$emit('toggle-complete', lift.id)" :lift="lift" />
-    </div>
-  </div>
 </template>
 
 <script>
-import Lift from "./Lift";
 export default {
   name: "Day",
   props: {
     day: Object,
-    lifts: Array,
   },
   /*mounted() {
     if (this.day.dayId <= 1) this.fetchDay(this.day.dayId);
@@ -37,15 +28,6 @@ export default {
       return data;
     },
   },*/
-  data() {
-    return {
-      lift: [],
-      lift: Object,
-    };
-  },
-  components: {
-    Lift,
-  },
   emits: ["toggle-complete", "toggle-complete-day"],
 };
 </script>

@@ -1,7 +1,5 @@
 <template>
   <div
-    :key="componentKey"
-    @click="forceRerender"
     @dblclick="$emit('toggle-complete', lift.id)"
     :class="[lift.complete ? 'complete' : '', 'lift']"
   >
@@ -17,17 +15,7 @@ export default {
   props: {
     lift: Object,
   },
-  data() {
-    return {
-      componentKey: 0,
-    };
-  },
-  methods: {
-    forceRerender() {
-      this.componentKey += 1;
-    },
-  },
-  emits: ["toggle-complete", "toggle-complete-day", "toggleComplete"],
+  emits: ["toggle-complete", "toggleComplete"],
 };
 </script>
 

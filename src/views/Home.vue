@@ -1,5 +1,11 @@
 <template>
-  <Week @toggle-complete-day="toggleCompleteDay" :week="week" :lifts="lifts" />
+  <Week
+    @toggle-complete-day="toggleCompleteDay"
+    @toggle-complete="toggleComplete"
+    :week="week"
+    :lifts="lifts"
+    :lift="lift"
+  />
 </template>
 
 <script>
@@ -18,6 +24,32 @@ export default {
     };
   },
   methods: {
+    async toggleComplete(id) {
+      const LiftToToggle = await this.fetchLift(id);
+      const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
+      var res = await fetch(`api/lifts/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updLift),
+      });
+
+      const data = await res.json();
+      this.lifts = this.lifts.map((lift) =>
+        lift.id === id ? { ...lift, complete: data.complete } : lift
+      );
+      /*bla = this.lifts.map((lift) =>
+        lift.id === id ? { ...lift, complete: data.complete } : lift
+      );*/
+    },
+    async fetchLift(id) {
+      const res = await fetch(`api/lifts/${id}`);
+      const tempData = await res.json();
+      /*const res = await fetch(`api/week/${dayid}/${id}`); // this will need work
+      const data = await res.json();*/
+      return tempData;
+    },
     async toggleCompleteDay(id) {
       const DayToToggle = await this.fetchDay(id);
       const updDay = { ...DayToToggle, complete: !DayToToggle.complete };
