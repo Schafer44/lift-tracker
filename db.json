@@ -4,37 +4,121 @@
       "id": 1,
       "text": "Bench",
       "complete": false,
-      "parentId": 1
+      "parentId": 1,
+      "reps": "5X5",
+      "weight": 125
     },
     {
       "id": 2,
-      "text": "Reverse Grip",
+      "text": "Dumbbell Bench",
       "complete": false,
-      "parentId": 1
+      "parentId": 1,
+      "reps": "3X8",
+      "weight": 40
     },
     {
       "id": 3,
-      "text": "Hammer Curls",
+      "text": "Reverse Grip",
       "complete": false,
-      "parentId": 2
+      "parentId": 1,
+      "reps": "3X10",
+      "weight": 75
     },
     {
       "id": 4,
-      "text": "Preacher Curls",
+      "text": "Decline Bench",
       "complete": false,
-      "parentId": 2
+      "parentId": 1,
+      "reps": "4X8",
+      "weight": 95
     },
     {
       "id": 5,
-      "text": "Hammer",
+      "text": "Cable Pulldowns",
       "complete": false,
-      "parentId": 3
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 90
     },
     {
       "id": 6,
-      "text": "Curls",
+      "text": "Bent-over Rows",
       "complete": false,
-      "parentId": 3
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 65
+    },
+    {
+      "id": 7,
+      "text": "Dumbbell Curls",
+      "complete": false,
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 25
+    },
+    {
+      "id": 8,
+      "text": "Preacher Curls",
+      "complete": false,
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 45
+    },
+    {
+      "id": 9,
+      "text": "Wide Grip Straight Bar",
+      "complete": false,
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 70
+    },
+    {
+      "id": 10,
+      "text": "Hammer Curls",
+      "complete": false,
+      "parentId": 2,
+      "reps": "3X10",
+      "weight": 25
+    },
+    {
+      "id": 11,
+      "text": "Tri Rope",
+      "complete": false,
+      "parentId": 3,
+      "reps": "3X10",
+      "weight": 60
+    },
+    {
+      "id": 12,
+      "text": "Head Bangers",
+      "complete": false,
+      "parentId": 3,
+      "reps": "3X10",
+      "weight": 45
+    },
+    {
+      "id": 13,
+      "text": "Dumbbell Press",
+      "complete": false,
+      "parentId": 3,
+      "reps": "4X10",
+      "weight": 25
+    },
+    {
+      "id": 14,
+      "text": "Lateral Raise",
+      "complete": false,
+      "parentId": 3,
+      "reps": "3X10",
+      "weight": 20
+    },
+    {
+      "id": 15,
+      "text": "Front Raise",
+      "complete": false,
+      "parentId": 3,
+      "reps": "3X10",
+      "weight": 20
     }
   ],
   "week": [
