@@ -2,6 +2,7 @@
   <Week
     @toggle-complete-day="toggleCompleteDay"
     @toggle-complete="toggleComplete"
+    @update-weight="updateWeight"
     :week="week"
     :lifts="lifts"
     :lift="lift"
@@ -24,6 +25,27 @@ export default {
     };
   },
   methods: {
+    async updateWeight(lift) {
+      console.log(lift.id);
+      const LiftToUpdate = await this.fetchLift(lift.id);
+      const updLift = { ...LiftToUpdate, weight: lift.weight };
+      var res = await fetch(`api/lifts/${lift.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updLift),
+      });
+
+      const data = await res.json();
+
+      console.log("d", lift.id);
+      console.log("d", lift.weight);
+      console.log(data.weight);
+      this.lifts = this.lifts.map((liftTwo) =>
+        liftTwo.id === lift.id ? { ...liftTwo, weight: data.weight } : liftTwo
+      );
+    },
     async toggleComplete(id) {
       const LiftToToggle = await this.fetchLift(id);
       const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
@@ -36,12 +58,11 @@ export default {
       });
 
       const data = await res.json();
+
+      console.log(data);
       this.lifts = this.lifts.map((lift) =>
         lift.id === id ? { ...lift, complete: data.complete } : lift
       );
-      /*bla = this.lifts.map((lift) =>
-        lift.id === id ? { ...lift, complete: data.complete } : lift
-      );*/
     },
     async fetchLift(id) {
       const res = await fetch(`api/lifts/${id}`);
