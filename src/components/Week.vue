@@ -13,21 +13,8 @@
         <Lift
           @toggle-complete="$emit('toggle-complete', lift.id)"
           :lift="lift"
+          @on-Submit="onSubmit"
         />
-        <h3 class="weightBtn">
-          <form @submit="onSubmit(lift.id, $event)" class="update-weight">
-            <div class="form-control">
-              <label>Weight</label>
-              <input
-                type="number"
-                v-model="weight"
-                name="weight"
-                placeholder=""
-              />
-            </div>
-            <input type="submit" value="Submit" class="submit" />
-          </form>
-        </h3>
       </div>
     </div>
   </div>
@@ -49,18 +36,18 @@ export default {
     Lift,
   },
   methods: {
-    onSubmit(id, e) {
+    onSubmit(id, weight, e) {
       e.preventDefault();
 
       console.log("a", id);
-      if (!this.weight) {
+      if (!weight) {
         alert("Please add a weight");
         return;
       }
       const updateWeight = {
         /*id: Math.floor(Math.random() * 100000),*/
         id: id,
-        weight: this.weight,
+        weight: weight,
       };
       console.log("rer", updateWeight);
       this.$emit("update-weight", updateWeight);

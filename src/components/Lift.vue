@@ -10,6 +10,18 @@
       {{ lift.reps }}
     </h3>
     <h3>Last week's weight = {{ lift.weight }}</h3>
+    <h3 class="weightBtn">
+      <form
+        @submit="$emit('on-Submit', lift.id, weight, $event)"
+        :class="update - weight"
+      >
+        <div class="form-control">
+          <label>This week's Weight</label>
+          <input type="number" v-model="weight" name="weight" placeholder="" />
+        </div>
+        <input type="submit" value="Submit" class="submit" />
+      </form>
+    </h3>
   </div>
 </template>
 
