@@ -1,6 +1,5 @@
 <template>
   <Week
-    @toggle-complete-day="toggleCompleteDay"
     @toggle-complete="toggleComplete"
     @update-weight="updateWeight"
     :week="week"
@@ -22,6 +21,7 @@ export default {
       lifts: [],
       day: [],
       lift: {},
+      weight: Number,
     };
   },
   methods: {
@@ -38,10 +38,6 @@ export default {
       });
 
       const data = await res.json();
-
-      console.log("d", lift.id);
-      console.log("d", lift.weight);
-      console.log(data.weight);
       this.lifts = this.lifts.map((liftTwo) =>
         liftTwo.id === lift.id ? { ...liftTwo, weight: data.weight } : liftTwo
       );
@@ -63,6 +59,21 @@ export default {
       this.lifts = this.lifts.map((lift) =>
         lift.id === id ? { ...lift, complete: data.complete } : lift
       );
+      var isTrue = "";
+      console.log(this.lifts);
+      console.log(data.parentId);
+      this.lifts.forEach((tempLift) => {
+        if (tempLift.parentId === data.parentId) {
+          if (tempLift.complete === true && isTrue !== false) {
+            isTrue = true;
+            console.log("t", isTrue);
+          } else {
+            isTrue = false;
+            console.log("f", isTrue);
+          }
+        }
+      });
+      this.toggleCompleteDay(data.parentId, isTrue);
     },
     async fetchLift(id) {
       const res = await fetch(`api/lifts/${id}`);
@@ -71,9 +82,9 @@ export default {
       const data = await res.json();*/
       return tempData;
     },
-    async toggleCompleteDay(id) {
+    async toggleCompleteDay(id, isTrue) {
       const DayToToggle = await this.fetchDay(id);
-      const updDay = { ...DayToToggle, complete: !DayToToggle.complete };
+      const updDay = { ...DayToToggle, complete: isTrue };
       const res = await fetch(`api/week/${id}`, {
         method: "PUT",
         headers: {
@@ -83,7 +94,7 @@ export default {
       });
       const data = await res.json();
       this.week = this.week.map((day) =>
-        day.id === id ? { ...day, complete: data.complete } : day
+        day.id === id ? { ...day, complete: isTrue } : day
       );
     },
     async fetchWeek() {

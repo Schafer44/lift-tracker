@@ -11,10 +11,7 @@
     </h3>
     <h3>Last week's weight = {{ lift.weight }}</h3>
     <h3 class="weightBtn">
-      <form
-        @submit="$emit('on-Submit', lift.id, weight, $event)"
-        :class="update - weight"
-      >
+      <form @submit="$emit('on-Submit', lift.id, weight, $event)">
         <div class="form-control">
           <label>This week's Weight</label>
           <input type="number" v-model="weight" name="weight" placeholder="" />
@@ -30,6 +27,7 @@ export default {
   name: "Lift",
   props: {
     lift: Object,
+    weight: Number,
   },
   emits: ["toggle-complete", "toggleComplete", "update-weight"],
 };

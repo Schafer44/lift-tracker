@@ -1,7 +1,7 @@
 <template>
   <div
-    @dblclick="$emit('toggle-complete-day', day.id)"
     :class="[day.complete ? 'complete' : '', 'day']"
+    @click="$emit('toggle-is-hidden', day.id)"
   >
     <h3>
       {{ day.text }}
@@ -28,7 +28,7 @@ export default {
       return data;
     },
   },*/
-  emits: ["toggle-complete", "toggle-complete-day"],
+  emits: ["toggle-complete", "toggle-complete-day", "toggle-is-hidden"],
 };
 </script>
 

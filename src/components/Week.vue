@@ -3,18 +3,26 @@
     <Day
       @toggle-complete-day="$emit('toggle-complete-day', day.id)"
       :day="day"
+      @toggle-is-hidden="toggleIsHidden"
     />
-    <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
-      <div
-        v-if="
-          day.id === JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))
-        "
-      >
-        <Lift
-          @toggle-complete="$emit('toggle-complete', lift.id)"
-          :lift="lift"
-          @on-Submit="onSubmit"
-        />
+    <div>
+      <div v-if="!isHidden">
+        <div v-if="dayNum === day.id">
+          <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
+            <div
+              v-if="
+                day.id ===
+                JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))
+              "
+            >
+              <Lift
+                @toggle-complete="$emit('toggle-complete', lift.id)"
+                :lift="lift"
+                @on-Submit="onSubmit"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -26,16 +34,27 @@ import Day from "./Day";
 import Lift from "./Lift";
 export default {
   name: "Week",
+  data() {
+    return {
+      isHidden: true,
+      dayNum: "",
+    };
+  },
   props: {
     week: Array,
     lifts: Array,
     lift: Object,
+    weight: Number,
   },
   components: {
     Day,
     Lift,
   },
   methods: {
+    toggleIsHidden(dayId) {
+      this.isHidden = !this.isHidden;
+      this.dayNum = dayId;
+    },
     onSubmit(id, weight, e) {
       e.preventDefault();
 
