@@ -44,7 +44,6 @@ export default {
     week: Array,
     lifts: Array,
     lift: Object,
-    weight: Number,
   },
   components: {
     Day,

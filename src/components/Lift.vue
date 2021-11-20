@@ -29,7 +29,7 @@ export default {
     lift: Object,
     weight: Number,
   },
-  emits: ["toggle-complete", "toggleComplete", "update-weight"],
+  emits: ["toggle-complete", "toggleComplete", "update-weight", "on-Submit"],
 };
 </script>
 
