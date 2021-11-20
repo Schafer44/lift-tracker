@@ -1,7 +1,9 @@
 <template>
   <Header />
   <div class="container">
-    <router-view />
+    <div>
+      <router-view />
+    </div>
   </div>
   <Footer />
 </template>
@@ -36,6 +38,7 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+  margin-top: 100px;
 }
 .btn {
   display: inline-block;

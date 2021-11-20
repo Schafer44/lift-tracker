@@ -15,19 +15,6 @@ export default {
   props: {
     day: Object,
   },
-  /*mounted() {
-    if (this.day.dayId <= 1) this.fetchDay(this.day.dayId);
-  },
-  methods: {
-    async fetchDay(dayId) {
-      console.log("d", dayId);
-      const res = fetch(`api/${dayId}`);
-      const data = await res.json();
-      console.log("od", data);
-      this.lift = res;
-      return data;
-    },
-  },*/
   emits: ["toggle-complete", "toggle-complete-day", "toggle-is-hidden"],
 };
 </script>

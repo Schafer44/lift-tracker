@@ -41,6 +41,7 @@ export default {
   padding: 0px 20px;
   cursor: pointer;
   font-size: 16px;
+  padding-bottom: 30px;
 }
 .lift.complete {
   border-left: 5px solid green;
@@ -56,6 +57,7 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
+  padding: 10px;
 }
 .form-control input {
   width: 30%;

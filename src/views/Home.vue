@@ -22,6 +22,7 @@ export default {
       day: [],
       lift: {},
       weight: Number,
+      user: "",
     };
   },
   methods: {
@@ -29,7 +30,7 @@ export default {
       console.log(lift.id);
       const LiftToUpdate = await this.fetchLift(lift.id);
       const updLift = { ...LiftToUpdate, weight: lift.weight };
-      var res = await fetch(`api/lifts/${lift.id}`, {
+      var res = await fetch(`api/${this.user}/${lift.id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +46,7 @@ export default {
     async toggleComplete(id) {
       const LiftToToggle = await this.fetchLift(id);
       const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
-      var res = await fetch(`api/lifts/${id}`, {
+      var res = await fetch(`api/${this.user}/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -76,7 +77,7 @@ export default {
       this.toggleCompleteDay(data.parentId, isTrue);
     },
     async fetchLift(id) {
-      const res = await fetch(`api/lifts/${id}`);
+      const res = await fetch(`api/${this.user}/${id}`);
       const tempData = await res.json();
       /*const res = await fetch(`api/week/${dayid}/${id}`); // this will need work
       const data = await res.json();*/
@@ -103,7 +104,7 @@ export default {
       return data;
     },
     async fetchLifts() {
-      const res = await fetch("api/lifts");
+      const res = await fetch(`api/${this.user}`);
       const data = await res.json();
       return data;
     },
@@ -114,8 +115,13 @@ export default {
     },
   },
   async created() {
-    this.week = await this.fetchWeek();
-    this.lifts = await this.fetchLifts();
+    this.user = this.$route.params.user;
+    if (this.user === undefined) {
+      this.$router.push("/");
+    } else {
+      this.week = await this.fetchWeek();
+      this.lifts = await this.fetchLifts();
+    }
   },
 };
 </script>
