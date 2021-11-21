@@ -28,14 +28,16 @@ export default {
   padding: 0;
 }
 body {
+  background-color: rgb(36, 36, 36);
   font-family: "Poppins", sans-serif;
 }
 .container {
   max-width: 500px;
   margin: 30px auto;
   overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
+  border-style: solid;
+  border-width: 5px;
+  border-image: linear-gradient(45deg, #ff2525, #ffe53b) 1;
   padding: 30px;
   border-radius: 5px;
   margin-top: 100px;
@@ -43,7 +45,7 @@ body {
 .btn {
   display: inline-block;
   background: #000;
-  color: #fff;
+  color: rgb(31, 31, 31);
   border: none;
   padding: 10px 20px;
   margin: 5px;

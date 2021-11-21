@@ -1,5 +1,6 @@
 <template>
   <Week
+    v-bind="$props"
     @toggle-complete="toggleComplete"
     @update-weight="updateWeight"
     :week="week"
@@ -23,6 +24,7 @@ export default {
       lift: {},
       weight: Number,
       user: "",
+      dayComplete: Boolean,
     };
   },
   methods: {
@@ -34,6 +36,7 @@ export default {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(updLift),
       });
@@ -50,6 +53,7 @@ export default {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(updLift),
       });
@@ -90,6 +94,7 @@ export default {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(updDay),
       });
@@ -121,6 +126,23 @@ export default {
     } else {
       this.week = await this.fetchWeek();
       this.lifts = await this.fetchLifts();
+      console.log("user", this.lifts[14]);
+      this.week.forEach((day) => {
+        var isTrue = "";
+        this.lifts.forEach((tempLift) => {
+          if (tempLift.parentId === day.id) {
+            if (tempLift.complete === true && isTrue !== false) {
+              isTrue = true;
+              console.log("t", isTrue);
+            } else {
+              isTrue = false;
+              console.log("f", isTrue);
+            }
+          }
+        });
+        console.log(day.id, "  ", isTrue);
+        this.toggleCompleteDay(day.id, isTrue);
+      });
     }
   },
 };

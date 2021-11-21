@@ -14,6 +14,7 @@ export default {
   name: "Day",
   props: {
     day: Object,
+    dayComplete: Boolean,
   },
   emits: ["toggle-complete", "toggle-complete-day", "toggle-is-hidden"],
 };
@@ -24,13 +25,15 @@ export default {
   color: red;
 }
 .day {
-  background: #f4f4f4;
+  background: rgb(22, 22, 22);
+  color: white;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
 .day.complete {
-  border-left: 5px solid green;
+  border-left: 5px solid #ff2525;
+  border-image: linear-gradient(#ff2525, #ffe53b, #ff2525) 1;
 }
 .day h3 {
   display: flex;

@@ -9,7 +9,8 @@
   bottom: 0;
   height: 60px;
   width: 100%;
-  background: #f4f4f4;
+  background: rgb(22, 22, 22);
+  color: white;
   padding: 0px 0px;
   display: flex;
   align-items: center;

@@ -1,6 +1,7 @@
 <template>
   <div :key="day.id" v-for="day in week">
     <Day
+      v-bind="$props"
       @toggle-complete-day="$emit('toggle-complete-day', day.id)"
       :day="day"
       @toggle-is-hidden="toggleIsHidden"
@@ -84,14 +85,14 @@ export default {
 
 <style scope>
 .weightBtn {
-  background: #f4f4f4;
-  margin-left: 40px;
-  padding: 0px 20px;
+  color: rgb(255, 255, 255);
+  margin-left: -5px;
+  padding: 0px 0px;
   cursor: pointer;
   font-size: 16px;
 }
 .lift.complete {
-  border-left: 5px solid green;
+  border-image: linear-gradient(#ff2525, #ffe53b, #ff2525) 1;
 }
 .form-control {
   height: 100%;

@@ -3,22 +3,29 @@
     @dblclick="$emit('toggle-complete', lift.id)"
     :class="[lift.complete ? 'complete' : '', 'lift']"
   >
-    <h3>
-      {{ lift.text }}
-    </h3>
-    <h3>
-      {{ lift.reps }}
-    </h3>
-    <h3>Last week's weight = {{ lift.weight }}</h3>
-    <h3 class="weightBtn">
-      <form @submit="$emit('on-Submit', lift.id, weight, $event)">
-        <div class="form-control">
-          <label>This week's Weight</label>
-          <input type="number" v-model="weight" name="weight" placeholder="" />
-        </div>
-        <input type="submit" value="Submit" class="submit" />
-      </form>
-    </h3>
+    <div class="liftContainer">
+      <p>
+        {{ lift.text }}
+      </p>
+      <p>
+        {{ lift.reps }}
+      </p>
+      <p>Last week's weight = {{ lift.weight }}</p>
+      <div class="weightBtn">
+        <form @submit="$emit('on-Submit', lift.id, weight, $event)">
+          <div class="form-control">
+            <label>This week's Weight</label>
+            <input
+              type="number"
+              v-model="weight"
+              name="weight"
+              placeholder=""
+            />
+          </div>
+          <input type="submit" value="Submit" class="submit" />
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,17 +41,23 @@ export default {
 </script>
 
 <style scope>
+.liftContainer {
+  padding: 10px;
+  margin: 5px;
+}
 .lift {
-  background: #f4f4f4;
+  background: rgb(22, 22, 22);
+  color: rgb(255, 255, 255);
   margin-bottom: 0px;
   margin-left: 40px;
+  margin-right: 5px;
   padding: 0px 20px;
   cursor: pointer;
   font-size: 16px;
   padding-bottom: 30px;
 }
 .lift.complete {
-  border-left: 5px solid green;
+  border-left: 5px solid #ff2525;
 }
 .lift h3 {
   margin-top: 5px;
@@ -57,7 +70,7 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
-  padding: 10px;
+  padding: 5px;
 }
 .form-control input {
   width: 30%;
@@ -66,7 +79,7 @@ export default {
 }
 .form-control label {
   font-size: 16px;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .submit {
   width: 100%;

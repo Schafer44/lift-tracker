@@ -43,7 +43,7 @@
     {
       "id": 6,
       "text": "Bent-over Rows",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 65
@@ -51,7 +51,7 @@
     {
       "id": 7,
       "text": "Dumbbell Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 25
@@ -59,7 +59,7 @@
     {
       "id": 8,
       "text": "Preacher Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 45
@@ -67,7 +67,7 @@
     {
       "id": 9,
       "text": "Wide Grip Straight Bar",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 70
@@ -75,7 +75,7 @@
     {
       "id": 10,
       "text": "Hammer Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 25
@@ -125,15 +125,15 @@
     {
       "id": 1,
       "text": "Bench",
-      "complete": false,
+      "complete": true,
       "parentId": 1,
       "reps": "5X5",
-      "weight": 75
+      "weight": 85
     },
     {
       "id": 2,
       "text": "Dumbbell Bench",
-      "complete": false,
+      "complete": true,
       "parentId": 1,
       "reps": "3X8",
       "weight": 25
@@ -165,7 +165,7 @@
     {
       "id": 6,
       "text": "Bent-over Rows",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 65
@@ -173,7 +173,7 @@
     {
       "id": 7,
       "text": "Dumbbell Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 20
@@ -181,7 +181,7 @@
     {
       "id": 8,
       "text": "Preacher Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 25
@@ -189,7 +189,7 @@
     {
       "id": 9,
       "text": "Wide Grip Straight Bar",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 70
@@ -197,7 +197,7 @@
     {
       "id": 10,
       "text": "Hammer Curls",
-      "complete": false,
+      "complete": true,
       "parentId": 2,
       "reps": "3X10",
       "weight": 20
@@ -205,7 +205,7 @@
     {
       "id": 11,
       "text": "Tri Rope",
-      "complete": false,
+      "complete": true,
       "parentId": 3,
       "reps": "3X10",
       "weight": 90
@@ -213,7 +213,7 @@
     {
       "id": 12,
       "text": "Head Bangers",
-      "complete": false,
+      "complete": true,
       "parentId": 3,
       "reps": "3X10",
       "weight": 25
@@ -221,7 +221,7 @@
     {
       "id": 13,
       "text": "Dumbbell Press",
-      "complete": false,
+      "complete": true,
       "parentId": 3,
       "reps": "4X10",
       "weight": 25
@@ -229,7 +229,7 @@
     {
       "id": 14,
       "text": "Lateral Raise",
-      "complete": false,
+      "complete": true,
       "parentId": 3,
       "reps": "3X10",
       "weight": 10
@@ -237,7 +237,7 @@
     {
       "id": 15,
       "text": "Front Raise",
-      "complete": false,
+      "complete": true,
       "parentId": 3,
       "reps": "3X10",
       "weight": 10
@@ -248,7 +248,7 @@
       "id": 1,
       "text": "Day 1",
       "dayId": 1,
-      "complete": true
+      "complete": false
     },
     {
       "id": 2,
@@ -258,7 +258,7 @@
     },
     {
       "id": 3,
-      "complete": false,
+      "complete": true,
       "text": "Day 3",
       "dayId": 3
     }
