@@ -83,22 +83,11 @@ export default {
     async fetchLift(id) {
       const res = await fetch(`api/${this.user}/${id}`);
       const tempData = await res.json();
-      /*const res = await fetch(`api/week/${dayid}/${id}`); // this will need work
-      const data = await res.json();*/
       return tempData;
     },
     async toggleCompleteDay(id, isTrue) {
       const DayToToggle = await this.fetchDay(id);
       const updDay = { ...DayToToggle, complete: isTrue };
-      const res = await fetch(`api/week/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(updDay),
-      });
-      const data = await res.json();
       this.week = this.week.map((day) =>
         day.id === id ? { ...day, complete: isTrue } : day
       );
@@ -126,6 +115,7 @@ export default {
     } else {
       this.week = await this.fetchWeek();
       this.lifts = await this.fetchLifts();
+
       console.log("user", this.lifts[14]);
       this.week.forEach((day) => {
         var isTrue = "";

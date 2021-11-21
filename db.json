@@ -205,7 +205,7 @@
     {
       "id": 11,
       "text": "Tri Rope",
-      "complete": true,
+      "complete": false,
       "parentId": 3,
       "reps": "3X10",
       "weight": 90
@@ -258,7 +258,7 @@
     },
     {
       "id": 3,
-      "complete": true,
+      "complete": false,
       "text": "Day 3",
       "dayId": 3
     }
