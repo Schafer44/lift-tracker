@@ -1,20 +1,19 @@
 <template>
-  <Header />
-  <div class="container">
-    <div>
-      <router-view />
+  <div class="page">
+    <div class="container">
+      <div class="underline">
+        <router-view />
+      </div>
     </div>
   </div>
   <Footer />
 </template>
 
 <script>
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 export default {
   name: "App",
   components: {
-    Header,
     Footer,
   },
 };
@@ -31,6 +30,9 @@ body {
   background-color: rgb(36, 36, 36);
   font-family: "Poppins", sans-serif;
 }
+.page {
+  height: 100%;
+}
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -41,6 +43,19 @@ body {
   padding: 30px;
   border-radius: 5px;
   margin-top: 100px;
+}
+.underline:after {
+  content: "\00a0";
+  background-image: radial-gradient(
+    at 50% 0,
+    #ffe53b 0%,
+    #ff2525 50%,
+    transparent 75%
+  );
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  float: left;
+  width: 100%;
 }
 .btn {
   display: inline-block;
