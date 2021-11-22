@@ -1,12 +1,18 @@
 <template>
-  <Week
-    v-bind="$props"
-    @toggle-complete="toggleComplete"
-    @update-weight="updateWeight"
-    :week="week"
-    :lifts="lifts"
-    :lift="lift"
-  />
+  <div :class="[this.user === 'Tanner' ? 'containerTanner' : 'containerErin']">
+    <div
+      :class="[this.user === 'Tanner' ? 'underlineTanner' : 'underlineErin']"
+    >
+      <Week
+        v-bind="$props"
+        @toggle-complete="toggleComplete"
+        @update-weight="updateWeight"
+        :week="week"
+        :lifts="lifts"
+        :lift="lift"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +35,6 @@ export default {
   },
   methods: {
     async updateWeight(lift) {
-      console.log(lift.id);
       const LiftToUpdate = await this.fetchLift(lift.id);
       const updLift = { ...LiftToUpdate, weight: lift.weight };
       var res = await fetch(`api/${this.user}/${lift.id}`, {
@@ -59,22 +64,16 @@ export default {
       });
 
       const data = await res.json();
-
-      console.log(data);
       this.lifts = this.lifts.map((lift) =>
         lift.id === id ? { ...lift, complete: data.complete } : lift
       );
       var isTrue = "";
-      console.log(this.lifts);
-      console.log(data.parentId);
       this.lifts.forEach((tempLift) => {
         if (tempLift.parentId === data.parentId) {
           if (tempLift.complete === true && isTrue !== false) {
             isTrue = true;
-            console.log("t", isTrue);
           } else {
             isTrue = false;
-            console.log("f", isTrue);
           }
         }
       });
@@ -115,25 +114,84 @@ export default {
     } else {
       this.week = await this.fetchWeek();
       this.lifts = await this.fetchLifts();
-
-      console.log("user", this.lifts[14]);
       this.week.forEach((day) => {
         var isTrue = "";
         this.lifts.forEach((tempLift) => {
           if (tempLift.parentId === day.id) {
             if (tempLift.complete === true && isTrue !== false) {
               isTrue = true;
-              console.log("t", isTrue);
             } else {
               isTrue = false;
-              console.log("f", isTrue);
             }
           }
         });
-        console.log(day.id, "  ", isTrue);
         this.toggleCompleteDay(day.id, isTrue);
       });
     }
   },
 };
 </script>
+
+<style>
+.containerTanner {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  border-style: solid;
+  border-width: 5px;
+  border-image: linear-gradient(var(--angle), #ff2525, #ffe53b) 1;
+  padding: 30px;
+  border-radius: 5px;
+  margin-top: 100px;
+  animation: 5s rotate linear infinite;
+}
+.containerErin {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  border-style: solid;
+  border-width: 5px;
+  border-image: linear-gradient(var(--angle), #ff2cdf, #0014ff) 1;
+  padding: 30px;
+  border-radius: 5px;
+  margin-top: 100px;
+  animation: 5s rotate linear infinite;
+}
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.underlineTanner:after {
+  content: "\00a0";
+  background-image: radial-gradient(
+    at 50% 0,
+    #ffe53b 0%,
+    #ff2525 50%,
+    transparent 75%
+  );
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  float: left;
+  width: 100%;
+}
+.underlineErin:after {
+  content: "\00a0";
+  background-image: radial-gradient(
+    at 50% 0,
+    #ff2cdf 0%,
+    #0014ff 50%,
+    transparent 75%
+  );
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  float: left;
+  width: 100%;
+}
+</style>

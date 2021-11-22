@@ -1,10 +1,6 @@
 <template>
   <div class="page">
-    <div class="container">
-      <div class="underline">
-        <router-view />
-      </div>
-    </div>
+    <router-view />
   </div>
   <Footer />
 </template>
@@ -32,30 +28,6 @@ body {
 }
 .page {
   height: 100%;
-}
-.container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  border-style: solid;
-  border-width: 5px;
-  border-image: linear-gradient(45deg, #ff2525, #ffe53b) 1;
-  padding: 30px;
-  border-radius: 5px;
-  margin-top: 100px;
-}
-.underline:after {
-  content: "\00a0";
-  background-image: radial-gradient(
-    at 50% 0,
-    #ffe53b 0%,
-    #ff2525 50%,
-    transparent 75%
-  );
-  background-size: 100% 2px;
-  background-repeat: no-repeat;
-  float: left;
-  width: 100%;
 }
 .btn {
   display: inline-block;

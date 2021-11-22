@@ -30,9 +30,10 @@ export default {
   text-decoration: none;
 }
 .link:hover {
-  background: -webkit-linear-gradient(45deg, #ff2525, #ffe53b);
+  background: -webkit-linear-gradient(45deg, white, black);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 20px;
+  margin: 0;
 }
 </style>
