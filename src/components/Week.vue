@@ -57,8 +57,6 @@ export default {
     },
     onSubmit(id, weight, e) {
       e.preventDefault();
-
-      console.log("a", id);
       if (!weight) {
         alert("Please add a weight");
         return;
@@ -68,7 +66,6 @@ export default {
         id: id,
         weight: weight,
       };
-      console.log("rer", updateWeight);
       this.$emit("update-weight", updateWeight);
 
       this.weight = "";
@@ -92,7 +89,7 @@ export default {
   font-size: 16px;
 }
 .lift.complete {
-  border-image: linear-gradient(#ff2525, #ffe53b, #ff2525) 1;
+  border-image: linear-gradient(black, rgb(255, 255, 255), black) 1;
 }
 .form-control {
   height: 100%;

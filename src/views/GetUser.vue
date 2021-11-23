@@ -74,7 +74,7 @@ label {
   padding: 30px;
   border-radius: 5px;
   margin-top: 100px;
-  animation: 5s rotate linear infinite;
+  -webkit-animation: 5s rotate linear infinite;
 }
 @keyframes rotate {
   to {

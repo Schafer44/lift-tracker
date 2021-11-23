@@ -157,7 +157,7 @@ export default {
   margin-top: 100px;
   animation: 5s rotate linear infinite;
 }
-@keyframes rotate {
+@-webkit-keyframes rotate {
   to {
     --angle: 360deg;
   }
