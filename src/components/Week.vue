@@ -10,7 +10,7 @@
       <div v-if="!isHidden">
         <div v-if="dayNum === day.id">
           <div v-for="lift in _Lifts" :key="lift">
-            <div v-if="day.id === lift.parentId">
+            <div v-if="day.baseId === lift.parentId">
               <Lift
                 @toggle-complete="$emit('toggle-complete', lift.id, lift)"
                 :lift="lift"

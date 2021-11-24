@@ -32,6 +32,7 @@ import {
   updateLiftLifts,
   getLiftId,
   getLifts,
+  updateDay,
 } from "@/fb";
 import { useLoadWeek } from "@/fb";
 export default {
@@ -76,14 +77,14 @@ export default {
         }
       });
       console.log(isTrue);
-      this.toggleCompleteDay(data.parentId, isTrue);
+      this.toggleCompleteDay(lift.parentId, isTrue);
     },
     async toggleCompleteDay(id, isTrue) {
-      const DayToToggle = await this.fetchDay(id);
-      const updDay = { ...DayToToggle, complete: isTrue };
-      this.week = this.week.map((day) =>
-        day.id === id ? { ...day, complete: isTrue } : day
-      );
+      console.log("idd", id);
+      const day = await getDay(id);
+      console.log("dayy", day);
+      day.complete = !day.complete;
+      updateDay(id, day);
     },
   },
   async created() {
