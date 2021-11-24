@@ -48,7 +48,7 @@ export const useLoadWeek = () => {
   return week;
 };
 
-export const getLifts = async (id) => {
+export const getLift = async (id) => {
   const lift = await tannerLiftCollection.doc(id).get();
 
   console.log("lift", day);
@@ -71,5 +71,16 @@ export const useLoadLifts = () => {
 
   onUnmounted(close);
   console.log("heheheh", Lifts.pe);
+  return Lifts;
+};
+export const getLifts = async () => {
+  var Lifts = "";
+  const snapshot = await firebase.firestore().collection("Tanner").get();
+  Lifts = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+    baseId: doc.id,
+  }));
+  console.log("fefe", Lifts);
   return Lifts;
 };
