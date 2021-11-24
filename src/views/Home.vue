@@ -11,12 +11,23 @@
         :lifts="lifts"
         :lift="lift"
       />
+      <tbody>
+        <tr v-for="{ id, text, complete } in weekTwo" :key="id">
+          <td>{{ id }}</td>
+          <td>{{ text }}</td>
+          <td>{{ complete }}</td>
+          <td></td>
+        </tr>
+      </tbody>
     </div>
   </div>
 </template>
 
 <script>
 import Week from "../components/Week";
+import { reactive, computed, onMounted } from "vue";
+import { useLoadTanner, getDay } from "@/fb";
+import { useLoadWeek } from "@/fb";
 export default {
   name: "Home",
   components: {
@@ -32,6 +43,12 @@ export default {
       user: "",
       dayComplete: Boolean,
     };
+  },
+  setup() {
+    const weekTwo = useLoadWeek();
+
+    console.log("week2", weekTwo);
+    return { weekTwo };
   },
   methods: {
     async updateWeight(lift) {
@@ -97,6 +114,8 @@ export default {
       return data;
     },
     async fetchLifts() {
+      const Lifts2 = useLoadTanner();
+      console.log("hell", Lifts2);
       const res = await fetch(`api/${this.user}`);
       const data = await res.json();
       return data;
@@ -114,6 +133,7 @@ export default {
     } else {
       this.week = await this.fetchWeek();
       this.lifts = await this.fetchLifts();
+      console.log("lifts", this.lifts);
       this.week.forEach((day) => {
         var isTrue = "";
         this.lifts.forEach((tempLift) => {
