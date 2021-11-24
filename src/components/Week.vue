@@ -1,5 +1,5 @@
 <template>
-  <div :key="day.id" v-for="day in week">
+  <div :key="day.id" v-for="day in _Week">
     <Day
       v-bind="$props"
       @toggle-complete-day="$emit('toggle-complete-day', day.id)"
@@ -9,15 +9,10 @@
     <div>
       <div v-if="!isHidden">
         <div v-if="dayNum === day.id">
-          <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
-            <div
-              v-if="
-                day.id ===
-                JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))
-              "
-            >
+          <div v-for="lift in _Lifts" :key="lift">
+            <div v-if="day.id === lift.parentId">
               <Lift
-                @toggle-complete="$emit('toggle-complete', lift.id)"
+                @toggle-complete="$emit('toggle-complete', lift.id, lift)"
                 :lift="lift"
                 @on-Submit="onSubmit"
               />
@@ -30,6 +25,7 @@
 </template>
 
 <script>
+import { useLoadWeek, useLoadLifts } from "@/fb";
 import { Vue } from "vue";
 import Day from "./Day";
 import Lift from "./Lift";
@@ -40,6 +36,11 @@ export default {
       isHidden: true,
       dayNum: "",
     };
+  },
+  setup() {
+    const _Lifts = useLoadLifts();
+    const _Week = useLoadWeek();
+    return { _Lifts, _Week };
   },
   props: {
     week: Array,
@@ -54,18 +55,16 @@ export default {
     toggleIsHidden(dayId) {
       this.isHidden = !this.isHidden;
       this.dayNum = dayId;
+      console.log(this.isHidden);
     },
-    onSubmit(id, weight, e) {
+    onSubmit(tempLift, weight, e) {
       e.preventDefault();
       if (!weight) {
         alert("Please add a weight");
         return;
       }
-      const updateWeight = {
-        /*id: Math.floor(Math.random() * 100000),*/
-        id: id,
-        weight: weight,
-      };
+      tempLift.weight = weight;
+      const updateWeight = tempLift;
       this.$emit("update-weight", updateWeight);
 
       this.weight = "";

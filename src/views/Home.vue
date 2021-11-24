@@ -26,7 +26,7 @@
 <script>
 import Week from "../components/Week";
 import { reactive, computed, onMounted } from "vue";
-import { useLoadTanner, getDay } from "@/fb";
+import { useLoadLifts, getDay, updateLiftLifts, getLiftId } from "@/fb";
 import { useLoadWeek } from "@/fb";
 export default {
   name: "Home",
@@ -62,13 +62,16 @@ export default {
         },
         body: JSON.stringify(updLift),
       });
+      console.log(lift);
+
+      updateLiftLifts(lift.baseId, lift);
 
       const data = await res.json();
       this.lifts = this.lifts.map((liftTwo) =>
         liftTwo.id === lift.id ? { ...liftTwo, weight: data.weight } : liftTwo
       );
     },
-    async toggleComplete(id) {
+    async toggleComplete(id, lift) {
       const LiftToToggle = await this.fetchLift(id);
       const updLift = { ...LiftToToggle, complete: !LiftToToggle.complete };
       var res = await fetch(`api/${this.user}/${id}`, {
@@ -79,8 +82,11 @@ export default {
         },
         body: JSON.stringify(updLift),
       });
-
       const data = await res.json();
+
+      lift.complete = !lift.complete;
+      updateLiftLifts(lift.baseId, lift);
+
       this.lifts = this.lifts.map((lift) =>
         lift.id === id ? { ...lift, complete: data.complete } : lift
       );
@@ -114,8 +120,6 @@ export default {
       return data;
     },
     async fetchLifts() {
-      const Lifts2 = useLoadTanner();
-      console.log("hell", Lifts2);
       const res = await fetch(`api/${this.user}`);
       const data = await res.json();
       return data;

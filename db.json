@@ -3,7 +3,7 @@
     {
       "id": 1,
       "text": "Bench",
-      "complete": false,
+      "complete": true,
       "parentId": 1,
       "reps": "5X5",
       "weight": 125

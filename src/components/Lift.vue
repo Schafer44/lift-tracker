@@ -12,7 +12,7 @@
       </p>
       <p>Last week's weight = {{ lift.weight }}</p>
       <div class="weightBtn">
-        <form @submit="$emit('on-Submit', lift.id, weight, $event)">
+        <form @submit="$emit('on-Submit', lift, weight, $event)">
           <div class="form-control">
             <label>This week's Weight</label>
             <input

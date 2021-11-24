@@ -48,42 +48,28 @@ export const useLoadWeek = () => {
   return week;
 };
 
-export const getLiftTanner = async (id) => {
+export const getLifts = async (id) => {
   const lift = await tannerLiftCollection.doc(id).get();
 
   console.log("lift", day);
   return lift.exists ? lift.data() : null;
 };
 
-export const updateLiftTanner = (id, lift) => {
+export const updateLiftLifts = (id, lift) => {
   return tannerLiftCollection.doc(id).update(lift);
 };
 
-export const useLoadTanner = () => {
-  const tanner = ref([]);
+export const useLoadLifts = () => {
+  const Lifts = ref([]);
   const close = tannerLiftCollection.onSnapshot((snapshot) => {
-    tanner.value = snapshot.doc.map((doc) => ({
-      id: doc.is,
+    Lifts.value = snapshot.docs.map((doc) => ({
+      id: doc.id,
       ...doc.data(),
+      baseId: doc.id,
     }));
   });
-  onUnmounted(close);
-  return tanner;
-};
 
-export const getLiftErin = async (id) => {
-  const lift = await erinLiftCollection.doc(id).get();
-  return lift.exists ? lift.data() : null;
-};
-
-export const updateLiftErin = (id, lift) => {
-  return erinLiftCollection.doc(id).update(lift);
-};
-export const useLoadErin = () => {
-  const erin = ref([]);
-  const close = erinLiftCollection.onSnapshot((snapshot) => {
-    erin.value = snapshot.doc.map((doc) => ({ id: doc.is, ...doc.data() }));
-  });
   onUnmounted(close);
-  return erin;
+  console.log("heheheh", Lifts.pe);
+  return Lifts;
 };
