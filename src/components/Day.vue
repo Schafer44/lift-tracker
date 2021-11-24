@@ -33,7 +33,7 @@ export default {
 }
 .day.complete {
   border-left: 5px solid #ff2525;
-  border-image: linear-gradient(#ff2525, #ffe53b, #ff2525) 1;
+  border-image: linear-gradient(black, white, black) 1;
 }
 .day h3 {
   display: flex;

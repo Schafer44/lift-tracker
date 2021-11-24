@@ -1,6 +1,6 @@
 <template>
   <div
-    @dblclick="$emit('toggle-complete', lift.id)"
+    @dblclick="$emit('toggle-complete')"
     :class="[lift.complete ? 'complete' : '', 'lift']"
   >
     <div class="liftContainer">

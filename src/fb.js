@@ -21,7 +21,7 @@ const db = firebaseApp.firestore();
 console.log("hey", db);
 const dayCollection = db.collection("week");
 console.log("dayC", dayCollection);
-const tannerLiftCollection = db.collection("Tanner");
+const LiftCollection = db.collection("Lifts");
 
 const erinLiftCollection = db.collection("Erin");
 
@@ -49,19 +49,19 @@ export const useLoadWeek = () => {
 };
 
 export const getLift = async (id) => {
-  const lift = await tannerLiftCollection.doc(id).get();
+  const lift = await LiftCollection.doc(id).get();
 
   console.log("lift", day);
   return lift.exists ? lift.data() : null;
 };
 
 export const updateLiftLifts = (id, lift) => {
-  return tannerLiftCollection.doc(id).update(lift);
+  return LiftCollection.doc(id).update(lift);
 };
 
 export const useLoadLifts = () => {
   const Lifts = ref([]);
-  const close = tannerLiftCollection.onSnapshot((snapshot) => {
+  const close = LiftCollection.onSnapshot((snapshot) => {
     Lifts.value = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -70,12 +70,11 @@ export const useLoadLifts = () => {
   });
 
   onUnmounted(close);
-  console.log("heheheh", Lifts.pe);
   return Lifts;
 };
 export const getLifts = async () => {
   var Lifts = "";
-  const snapshot = await firebase.firestore().collection("Tanner").get();
+  const snapshot = await firebase.firestore().collection("Lifts").get();
   Lifts = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),

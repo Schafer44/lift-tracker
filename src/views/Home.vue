@@ -11,14 +11,6 @@
         :lifts="lifts"
         :lift="lift"
       />
-      <tbody>
-        <tr v-for="{ id, text, complete } in weekTwo" :key="id">
-          <td>{{ id }}</td>
-          <td>{{ text }}</td>
-          <td>{{ complete }}</td>
-          <td></td>
-        </tr>
-      </tbody>
     </div>
   </div>
 </template>
@@ -61,13 +53,12 @@ export default {
     async updateWeight(lift) {
       updateLiftLifts(lift.baseId, lift);
     },
-    async toggleComplete(id, lift) {
+    async toggleComplete(lift) {
       lift.complete = !lift.complete;
       updateLiftLifts(lift.baseId, lift);
       var isTrue = "";
       const liftTwo = await getLifts();
       liftTwo.forEach((tempLift) => {
-        console.log("tempLift", tempLift);
         if (tempLift.parentId === lift.parentId) {
           if (tempLift.complete === true && isTrue !== false) {
             isTrue = true;
@@ -76,14 +67,11 @@ export default {
           }
         }
       });
-      console.log(isTrue);
       this.toggleCompleteDay(lift.parentId, isTrue);
     },
     async toggleCompleteDay(id, isTrue) {
-      console.log("idd", id);
       const day = await getDay(id);
-      console.log("dayy", day);
-      day.complete = !day.complete;
+      day.complete = isTrue;
       updateDay(id, day);
     },
   },

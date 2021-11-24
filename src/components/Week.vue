@@ -12,7 +12,7 @@
           <div v-for="lift in _Lifts" :key="lift">
             <div v-if="day.baseId === lift.parentId">
               <Lift
-                @toggle-complete="$emit('toggle-complete', lift.id, lift)"
+                @toggle-complete="$emit('toggle-complete', lift)"
                 :lift="lift"
                 @on-Submit="onSubmit"
               />
