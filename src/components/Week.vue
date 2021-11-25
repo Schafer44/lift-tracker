@@ -1,6 +1,6 @@
 <template>
   <div :key="day.id" v-for="day in Week">
-    <div v-if="day.user !== this.user">
+    <div v-if="day.user === this.user">
       <Day
         v-bind="$props"
         @toggle-complete-day="$emit('toggle-complete-day', day.id)"
