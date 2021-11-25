@@ -1,21 +1,23 @@
 <template>
-  <div :key="day.id" v-for="day in _Week">
-    <Day
-      v-bind="$props"
-      @toggle-complete-day="$emit('toggle-complete-day', day.id)"
-      :day="day"
-      @toggle-is-hidden="toggleIsHidden"
-    />
-    <div>
-      <div v-if="!isHidden">
-        <div v-if="dayNum === day.id">
-          <div v-for="lift in _Lifts" :key="lift">
-            <div v-if="day.baseId === lift.parentId">
-              <Lift
-                @toggle-complete="$emit('toggle-complete', lift)"
-                :lift="lift"
-                @on-Submit="onSubmit"
-              />
+  <div :key="day.id" v-for="day in Week">
+    <div v-if="day.user !== this.user">
+      <Day
+        v-bind="$props"
+        @toggle-complete-day="$emit('toggle-complete-day', day.id)"
+        :day="day"
+        @toggle-is-hidden="toggleIsHidden"
+      />
+      <div>
+        <div v-if="!isHidden">
+          <div v-if="dayNum === day.id">
+            <div v-for="lift in Lifts" :key="lift">
+              <div v-if="day.baseId === lift.parentId">
+                <Lift
+                  @toggle-complete="$emit('toggle-complete', lift)"
+                  :lift="lift"
+                  @on-Submit="onSubmit"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-import { useLoadWeek, useLoadLifts } from "@/fb";
+import { useLoadWeek, useLoadLifts, createLift } from "@/fb";
 import { Vue } from "vue";
 import Day from "./Day";
 import Lift from "./Lift";
@@ -38,14 +40,17 @@ export default {
     };
   },
   setup() {
-    const _Lifts = useLoadLifts();
-    const _Week = useLoadWeek();
-    return { _Lifts, _Week };
+    const Lifts = useLoadLifts();
+    const Week = useLoadWeek();
+    return { Lifts, Week };
   },
   props: {
     week: Array,
     lifts: Array,
+
+    user: String,
     lift: Object,
+    user: String,
   },
   components: {
     Day,

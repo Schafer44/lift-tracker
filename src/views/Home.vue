@@ -10,6 +10,7 @@
         :week="week"
         :lifts="lifts"
         :lift="lift"
+        :user="this.user"
       />
     </div>
   </div>

@@ -28,6 +28,9 @@ const erinLiftCollection = db.collection("Erin");
 export const createDay = (day) => {
   return dayCollection.add(day);
 };
+export const createLift = (lift) => {
+  return LiftCollection.add(lift);
+};
 
 export const getDay = async (id) => {
   const day = await dayCollection.doc(id).get();
