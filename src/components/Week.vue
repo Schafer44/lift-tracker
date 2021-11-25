@@ -1,26 +1,23 @@
 <template>
-  <div :key="day.id" v-for="day in week">
-    <Day
-      v-bind="$props"
-      @toggle-complete-day="$emit('toggle-complete-day', day.id)"
-      :day="day"
-      @toggle-is-hidden="toggleIsHidden"
-    />
-    <div>
-      <div v-if="!isHidden">
-        <div v-if="dayNum === day.id">
-          <div :key="lift.id" v-for="lift in JSON.parse(JSON.stringify(lifts))">
-            <div
-              v-if="
-                day.id ===
-                JSON.parse(JSON.stringify(lifts[lift.id - 1].parentId))
-              "
-            >
-              <Lift
-                @toggle-complete="$emit('toggle-complete', lift.id)"
-                :lift="lift"
-                @on-Submit="onSubmit"
-              />
+  <div :key="day.id" v-for="day in Week">
+    <div v-if="day.user !== this.user">
+      <Day
+        v-bind="$props"
+        @toggle-complete-day="$emit('toggle-complete-day', day.id)"
+        :day="day"
+        @toggle-is-hidden="toggleIsHidden"
+      />
+      <div>
+        <div v-if="!isHidden">
+          <div v-if="dayNum === day.id">
+            <div v-for="lift in Lifts" :key="lift">
+              <div v-if="day.baseId === lift.parentId">
+                <Lift
+                  @toggle-complete="$emit('toggle-complete', lift)"
+                  :lift="lift"
+                  @on-Submit="onSubmit"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -30,6 +27,7 @@
 </template>
 
 <script>
+import { useLoadWeek, useLoadLifts, createLift } from "@/fb";
 import { Vue } from "vue";
 import Day from "./Day";
 import Lift from "./Lift";
@@ -41,10 +39,18 @@ export default {
       dayNum: "",
     };
   },
+  setup() {
+    const Lifts = useLoadLifts();
+    const Week = useLoadWeek();
+    return { Lifts, Week };
+  },
   props: {
     week: Array,
     lifts: Array,
+
+    user: String,
     lift: Object,
+    user: String,
   },
   components: {
     Day,
@@ -54,18 +60,16 @@ export default {
     toggleIsHidden(dayId) {
       this.isHidden = !this.isHidden;
       this.dayNum = dayId;
+      console.log(this.isHidden);
     },
-    onSubmit(id, weight, e) {
+    onSubmit(tempLift, weight, e) {
       e.preventDefault();
       if (!weight) {
         alert("Please add a weight");
         return;
       }
-      const updateWeight = {
-        /*id: Math.floor(Math.random() * 100000),*/
-        id: id,
-        weight: weight,
-      };
+      tempLift.weight = weight;
+      const updateWeight = tempLift;
       this.$emit("update-weight", updateWeight);
 
       this.weight = "";
