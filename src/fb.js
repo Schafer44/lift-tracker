@@ -19,9 +19,9 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 console.log("hey", db);
-const dayCollection = db.collection("week").orderBy("id", "asc");
+const dayCollection = db.collection("week");
 console.log("dayC", dayCollection);
-const LiftCollection = db.collection("Lifts").orderBy("id", "asc");
+const LiftCollection = db.collection("Lifts");
 
 export const createDay = (day) => {
   return dayCollection.add(day);
@@ -42,7 +42,7 @@ export const updateDay = (id, day) => {
 
 export const useLoadWeek = () => {
   const week = ref([]);
-  const close = dayCollection.onSnapshot((snapshot) => {
+  const close = dayCollection.orderBy("id", "asc").onSnapshot((snapshot) => {
     week.value = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   });
   onUnmounted(close);
@@ -57,12 +57,14 @@ export const getLift = async (id) => {
 };
 
 export const updateLiftLifts = (id, lift) => {
+  console.log(id);
+  console.log(LiftCollection);
   return LiftCollection.doc(id).update(lift);
 };
 
 export const useLoadLifts = () => {
   const Lifts = ref([]);
-  const close = LiftCollection.onSnapshot((snapshot) => {
+  const close = LiftCollection.orderBy("id", "asc").onSnapshot((snapshot) => {
     Lifts.value = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),

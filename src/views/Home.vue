@@ -1,5 +1,6 @@
 <template>
   <div :class="[this.user === 'Tanner' ? 'containerTanner' : 'containerErin']">
+    <div class="borderTanner"></div>
     <div
       :class="[this.user === 'Tanner' ? 'underlineTanner' : 'underlineErin']"
     >
@@ -14,6 +15,14 @@
       />
     </div>
   </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 </template>
 
 <script>
@@ -101,39 +110,89 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+}
 .containerTanner {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  border-style: solid;
-  border-width: 5px;
-  border-image: linear-gradient(var(--angle), #ff2525, #ffe53b) 1;
-  padding: 30px;
-  border-radius: 5px;
-  margin-top: 100px;
-  animation: 5s rotate linear infinite;
+  position: relative;
+  margin: 300px auto 0;
+  background: linear-gradient(0deg, rgb(36, 36, 36), #272727);
 }
-.containerErin {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  border-style: solid;
-  border-width: 5px;
-  border-image: linear-gradient(var(--angle), #ff2cdf, #0014ff) 1;
-  padding: 30px;
-  border-radius: 5px;
-  margin-top: 100px;
-  animation: 5s rotate linear infinite;
+.containerTanner:before,
+.containerTanner:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(45deg, #ffe53b, #ff2525);
+  background-size: 400%;
+  z-index: -1;
+  -webkit-animation-name: steam;
+  -webkit-animation-duration: 20s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
 }
-@-webkit-keyframes rotate {
-  to {
-    --angle: 360deg;
+
+@keyframes steam {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 500% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+.containerTanner:after {
+  filter: blur(50px);
+}
+.containerTanner {
+  max-width: 98%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 5px;
+  margin-top: 100px;
+}
+
+.containerErin {
+  position: relative;
+  margin: 300px auto 0;
+  background: linear-gradient(0deg, rgb(36, 36, 36), #272727);
+}
+
+.containerErin:before,
+.containerErin:after {
+  content: "";
+  position: absolute;
+
+  display: block;
+  left: -2px;
+  top: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(45deg, #ff2cdf, #0014ff);
+  background-size: 400%;
+  z-index: -1;
+
+  -webkit-animation-name: steam;
+  -webkit-animation-duration: 20s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+.containerErin:after {
+  filter: blur(50px);
+}
+.containerErin {
+  max-width: 98%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 5px;
+  margin-top: 100px;
 }
 
 .underlineTanner:after {
