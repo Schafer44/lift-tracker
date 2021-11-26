@@ -19,9 +19,9 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 console.log("hey", db);
-const dayCollection = db.collection("week").orderBy("id", "asc");
+const dayCollection = db.collection("week");
 console.log("dayC", dayCollection);
-const LiftCollection = db.collection("Lifts").orderBy("id", "asc");
+const LiftCollection = db.collection("Lifts");
 
 export const createDay = (day) => {
   return dayCollection.add(day);
@@ -57,6 +57,7 @@ export const getLift = async (id) => {
 };
 
 export const updateLiftLifts = (id, lift) => {
+  console.log(id);
   return LiftCollection.doc(id).update(lift);
 };
 
