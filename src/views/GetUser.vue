@@ -6,7 +6,7 @@
           <div class="form-control">
             <router-link
               :to="{ name: 'Home', params: { user: 'Tanner' } }"
-              class="linkTanner"
+              class="form-control linkTanner"
             >
               Tanner</router-link
             >
@@ -21,7 +21,7 @@
           <div class="form-control">
             <router-link
               :to="{ name: 'Home', params: { user: 'Erin' } }"
-              class="linkErin"
+              class="form-control linkErin"
             >
               Erin</router-link
             >
@@ -46,12 +46,10 @@ export default {
 </script>
 <style>
 .linkTanner {
-  margin: 10px;
   color: white;
   text-decoration: none;
 }
 .linkErin {
-  margin: 10px;
   color: white;
   text-decoration: none;
 }
@@ -59,15 +57,11 @@ export default {
   background: -webkit-linear-gradient(45deg, #ff2525, #ffe53b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 20px;
-  margin-bottom: 0px;
 }
 .linkErin:hover {
   background: -webkit-linear-gradient(45deg, #ff2cdf, #0014ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 20px;
-  margin-bottom: 0px;
 }
 label {
   margin: 10px;
