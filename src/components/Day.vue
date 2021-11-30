@@ -6,6 +6,9 @@
     <h3>
       {{ day.text }}
     </h3>
+    <form @submit="$emit('on-Submit-delete-day', day, $event)">
+      <input type="submit" value="Delete" class="submit" />
+    </form>
   </div>
 </template>
 

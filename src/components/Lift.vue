@@ -26,6 +26,9 @@
         </form>
       </div>
     </div>
+    <form @submit="$emit('on-Submit-delete-lift', lift, $event)">
+      <input type="submit" value="Delete" class="submit" />
+    </form>
   </div>
 </template>
 
@@ -36,7 +39,13 @@ export default {
     lift: Object,
     weight: Number,
   },
-  emits: ["toggle-complete", "toggleComplete", "update-weight", "on-Submit"],
+  emits: [
+    "toggle-complete",
+    "toggleComplete",
+    "update-weight",
+    "on-Submit",
+    "on-Submit-delete-lift",
+  ],
 };
 </script>
 

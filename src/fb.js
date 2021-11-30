@@ -4,6 +4,7 @@ import "firebase/auth";
 import { doc, onSnapshot, getDocs, querySnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
@@ -22,6 +23,14 @@ console.log("hey", db);
 const dayCollection = db.collection("week");
 console.log("dayC", dayCollection);
 const LiftCollection = db.collection("Lifts");
+
+export const removeDay = (day) => {
+  return console.log(day.baseId);
+  //dayCollection.doc(day.baseId).delete();
+};
+export const removeLift = (lift) => {
+  return LiftCollection.doc(lift.baseId).delete();
+};
 
 export const createDay = (day) => {
   return dayCollection.add(day);

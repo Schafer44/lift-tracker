@@ -8,6 +8,10 @@
         v-bind="$props"
         @toggle-complete="toggleComplete"
         @update-weight="updateWeight"
+        @add-lift="addLift"
+        @add-day="addDay"
+        @delete-lift="deleteLift"
+        @delete-day="deleteDay"
         :week="week"
         :lifts="lifts"
         :lift="lift"
@@ -29,12 +33,14 @@
 import Week from "../components/Week";
 import { reactive, computed, onMounted } from "vue";
 import {
-  useLoadLifts,
+  removeLift,
   getDay,
   updateLiftLifts,
-  getLiftId,
+  removeDay,
   getLifts,
   updateDay,
+  createDay,
+  createLift,
 } from "@/fb";
 import { useLoadWeek } from "@/fb";
 export default {
@@ -60,6 +66,51 @@ export default {
     return { weekTwo };
   },
   methods: {
+    async deleteLift(tempLift) {
+      removeLift(tempLift);
+    },
+    async deleteDay(tempDay) {
+      removeDay(tempDay);
+    },
+
+    async addDay(user, temp, event) {
+      event.preventDefault();
+      temp = temp + 1;
+      var newDay = {
+        baseId: "",
+        complete: false,
+        id: temp,
+        text: "Day " + temp,
+        user: user,
+      };
+
+      createDay(newDay).then(function (documentRef) {
+        console.log(documentRef.id);
+        newDay.baseId = documentRef.id;
+        updateDay(documentRef.id, newDay);
+      });
+      console.log("addDay", newDay);
+    },
+    async addLift(user, reps, text, dayId, temp, event) {
+      event.preventDefault();
+      temp = temp + 1;
+      var newLift = {
+        baseId: "",
+        complete: false,
+        id: temp,
+        parentId: dayId,
+        reps: reps,
+        text: text,
+        user: user,
+        weight: 0,
+      };
+      createLift(newLift).then(function (documentRef) {
+        console.log("hy", documentRef.id);
+        newLift.baseId = documentRef.id;
+        updateLiftLifts(documentRef.id, newLift);
+      });
+      console.log("addLift", newLift);
+    },
     async updateWeight(lift) {
       updateLiftLifts(lift.baseId, lift);
     },
