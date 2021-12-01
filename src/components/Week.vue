@@ -2,6 +2,7 @@
   <div :key="day.id" v-for="day in Week">
     <div v-if="day.user === this.user" :set="(tempDay = day.id)">
       <Day
+        :editMode="editMode"
         v-bind="$props"
         @toggle-complete-day="$emit('toggle-complete-day', day.id)"
         :day="day"
@@ -14,6 +15,7 @@
             <div v-for="lift in Lifts" :key="lift">
               <div v-if="day.baseId === lift.parentId" :set="(temp = lift.id)">
                 <Lift
+                  :editMode="editMode"
                   @toggle-complete="$emit('toggle-complete', lift)"
                   :lift="lift"
                   @on-Submit="onSubmit"
@@ -21,52 +23,74 @@
                 />
               </div>
             </div>
-            <form
-              @submit="
-                $emit(
-                  'add-lift',
-                  this.user,
-                  reps,
-                  text,
-                  day.baseId,
-                  temp,
-                  $event
-                )
-              "
-            >
-              <div class="form-control">
-                <label>Add Lift</label>
-                <label>Lift Name</label>
-                <input
-                  type="string"
-                  v-model="text"
-                  name="text"
-                  placeholder=""
-                />
-                <label>Rep Amount</label>
-                <input
-                  type="string"
-                  v-model="reps"
-                  name="reps"
-                  placeholder=""
-                />
-              </div>
-              <input type="submit" value="Add Lift" class="submit" />
-            </form>
+            <div v-if="this.editMode === true">
+              <form
+                class="addLift"
+                @submit="
+                  $emit(
+                    'add-lift',
+                    this.user,
+                    reps,
+                    text,
+                    day.baseId,
+                    temp,
+                    $event
+                  )
+                "
+              >
+                <table>
+                  <tr class="trWek">
+                    <td class="tdWek">Add Lift</td>
+                  </tr>
+                  <tr class="trWek">
+                    <td class="tdWek">
+                      Lift Name
+                      <input
+                        type="string"
+                        v-model="text"
+                        name="text"
+                        placeholder=""
+                      />
+                    </td>
+                  </tr>
+                  <tr class="trWek">
+                    <td class="tdWek">
+                      Rep Amount
+                      <input
+                        type="string"
+                        v-model="reps"
+                        name="reps"
+                        placeholder=""
+                      />
+                    </td>
+                  </tr>
+                  <input type="submit" value="Add Lift" class="submit" />
+                </table>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <form @submit="$emit('add-day', this.user, tempDay, $event)">
-    <div class="form-control">
-      <label>Add Day</label>
+  <div v-if="this.editMode === true">
+    <div class="test">
+      <form
+        @submit="$emit('add-day', this.user, tempDay, $event)"
+        class="addDay"
+      >
+        <div class="form-control">
+          <label>Add Day</label>
+        </div>
+        <input type="submit" value="Add Day" class="submit" />
+      </form>
     </div>
-    <input type="submit" value="Add Day" class="submit" />
-  </form>
+  </div>
+  <button @click="allowEdit" class="addDay">Edit</button>
 </template>
 
 <script>
+import reactive from "vue";
 import { useLoadWeek, useLoadLifts, createLift } from "@/fb";
 import { Vue } from "vue";
 import Day from "./Day";
@@ -77,6 +101,7 @@ export default {
     return {
       isHidden: true,
       dayNum: "",
+      editMode: false,
     };
   },
   setup() {
@@ -97,6 +122,11 @@ export default {
     Lift,
   },
   methods: {
+    allowEdit(e) {
+      e.preventDefault();
+      this.editMode = !this.editMode;
+      console.log(this.editMode);
+    },
     toggleIsHidden(dayId) {
       this.isHidden = !this.isHidden;
       this.dayNum = dayId;
@@ -115,9 +145,6 @@ export default {
       if (ans === true) {
         this.$emit("delete-day", tempDay);
       }
-    },
-    confirm() {
-      <Confirm />;
     },
     onSubmit(tempLift, weight, e) {
       e.preventDefault();
@@ -144,6 +171,51 @@ export default {
 </script>
 
 <style scope>
+.test {
+  margin-right: 15px;
+}
+.trWek {
+  width: 100%;
+}
+.tdWek {
+  width: 10%;
+  justify-content: center;
+  text-align: center;
+}
+.addLift {
+  background: rgb(22, 22, 22);
+  color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+  margin-left: 40px;
+  margin-right: 5px;
+  padding: 0px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+.addDay {
+  background: rgb(22, 22, 22);
+  color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+  margin-left: 7px;
+  margin-right: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: calc(100% + 10px);
+}
+.form-control-add-lift {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.form-control-add-lift input {
+  height: 30px;
+  margin-top: 10px;
+}
 .weightBtn {
   color: rgb(255, 255, 255);
   margin-left: -5px;

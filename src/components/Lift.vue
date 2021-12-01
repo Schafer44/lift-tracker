@@ -1,35 +1,44 @@
 <template>
-  <div
-    @dblclick="$emit('toggle-complete')"
-    :class="[lift.complete ? 'complete' : '', 'lift']"
-  >
-    <div class="liftContainer">
-      <p>
-        {{ lift.text }}
-      </p>
-      <p>
-        {{ lift.reps }}
-      </p>
-      <p>Last week's weight = {{ lift.weight }}</p>
-      <div class="weightBtn">
-        <form @submit="$emit('on-Submit', lift, weight, $event)">
-          <div class="form-control">
-            <label>This week's Weight</label>
-            <input
-              type="number"
-              v-model="weight"
-              name="weight"
-              placeholder=""
-            />
+  <table class="table">
+    <td class="firstTd">
+      <div
+        @dblclick="$emit('toggle-complete')"
+        :class="[lift.complete ? 'complete' : '', 'lift']"
+      >
+        <div class="liftContainer">
+          <p>
+            {{ lift.text }}
+          </p>
+          <p>
+            {{ lift.reps }}
+          </p>
+          <p>Last week's weight = {{ lift.weight }}</p>
+          <div class="weightBtn">
+            <form @submit="$emit('on-Submit', lift, weight, $event)">
+              <div class="form-control">
+                <label>This week's Weight</label>
+                <input
+                  type="number"
+                  v-model="weight"
+                  name="weight"
+                  placeholder=""
+                />
+              </div>
+              <input type="submit" value="Submit" class="submit" />
+            </form>
           </div>
-          <input type="submit" value="Submit" class="submit" />
-        </form>
+        </div>
       </div>
+    </td>
+
+    <div v-if="this.editMode === true">
+      <td class="secondTd">
+        <form @submit="$emit('on-Submit-delete-lift', lift, $event)">
+          <button type="submit" value="Delete" class="submitDelete">X</button>
+        </form>
+      </td>
     </div>
-    <form @submit="$emit('on-Submit-delete-lift', lift, $event)">
-      <input type="submit" value="Delete" class="submit" />
-    </form>
-  </div>
+  </table>
 </template>
 
 <script>
@@ -38,6 +47,7 @@ export default {
   props: {
     lift: Object,
     weight: Number,
+    editMode: Boolean,
   },
   emits: [
     "toggle-complete",
@@ -50,6 +60,20 @@ export default {
 </script>
 
 <style scope>
+.table {
+  table-layout: auto;
+  width: 100%;
+}
+.firstTd {
+  width: 90%;
+}
+.secondTd {
+  width: 10%;
+}
+.submitDelete {
+  width: 10%;
+  height: 40px;
+}
 .liftContainer {
   padding: 10px;
   margin: 5px;
@@ -85,6 +109,8 @@ export default {
   width: 30%;
   height: 30px;
   font-size: 16px;
+
+  margin-top: 10px;
 }
 .form-control label {
   font-size: 16px;

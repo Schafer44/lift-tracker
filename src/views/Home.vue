@@ -208,6 +208,8 @@ body {
   padding: 30px;
   border-radius: 5px;
   margin-top: 100px;
+  margin-left: 5px;
+  padding-left: 0px;
 }
 
 .containerErin {
@@ -244,6 +246,8 @@ body {
   padding: 30px;
   border-radius: 5px;
   margin-top: 100px;
+  margin-left: 5px;
+  padding-left: 0px;
 }
 
 .underlineTanner:after {
@@ -258,6 +262,8 @@ body {
   background-repeat: no-repeat;
   float: left;
   width: 100%;
+  margin-left: 10px;
+  padding-left: 0px;
 }
 .underlineErin:after {
   content: "\00a0";
@@ -271,5 +277,7 @@ body {
   background-repeat: no-repeat;
   float: left;
   width: 100%;
+  margin-left: 10px;
+  padding-left: 0px;
 }
 </style>

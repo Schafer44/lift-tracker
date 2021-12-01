@@ -24,9 +24,17 @@ const dayCollection = db.collection("week");
 console.log("dayC", dayCollection);
 const LiftCollection = db.collection("Lifts");
 
-export const removeDay = (day) => {
-  return console.log(day.baseId);
-  //dayCollection.doc(day.baseId).delete();
+export const removeDay = async (day) => {
+  //return console.log(LiftCollection);
+  const allLifts = await getLifts();
+  console.log(allLifts);
+  console.log(day.baseId);
+  allLifts.forEach((lift) => {
+    if (lift.parentId === day.baseId) {
+      removeLift(lift);
+    }
+  });
+  return dayCollection.doc(day.baseId).delete();
 };
 export const removeLift = (lift) => {
   return LiftCollection.doc(lift.baseId).delete();
