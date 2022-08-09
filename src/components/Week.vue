@@ -104,6 +104,10 @@ export default {
       editMode: false,
     };
   },
+
+  /*
+   * on setup loads Lifts and Week
+   */
   setup() {
     const Lifts = useLoadLifts();
     const Week = useLoadWeek();
@@ -122,16 +126,26 @@ export default {
     Lift,
   },
   methods: {
+    /*
+     * Toggles edit mode
+     */
     allowEdit(e) {
       e.preventDefault();
       this.editMode = !this.editMode;
       console.log(this.editMode);
     },
+    /*
+     * Toggles isHidden
+     */
     toggleIsHidden(dayId) {
       this.isHidden = !this.isHidden;
       this.dayNum = dayId;
       console.log(this.isHidden);
     },
+
+    /*
+     * Makes sure you want to a lift
+     */
     onSubmitDeleteLift(tempLift, e) {
       e.preventDefault();
       const ans = confirm("Are you sure you want to delete this?");
@@ -139,6 +153,9 @@ export default {
         this.$emit("delete-lift", tempLift);
       }
     },
+    /*
+     * Makes sure you want to a day
+     */
     onSubmitDeleteDay(tempDay, e) {
       e.preventDefault();
       const ans = confirm("Are you sure you want to delete this?");
@@ -146,6 +163,10 @@ export default {
         this.$emit("delete-day", tempDay);
       }
     },
+
+    /*
+     * Makes sure that a weight has been added to a lift before update
+     */
     onSubmit(tempLift, weight, e) {
       e.preventDefault();
       if (!weight) {

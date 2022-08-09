@@ -29,6 +29,35 @@
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="underline">
+        <div :class="[container ? 'complete' : '', 'day']">
+          <div class="form-control">
+            <router-link
+              :to="{ name: 'Home', params: { user: 'Abbie' } }"
+              class="form-control linkAbbie"
+            >
+              Abbie</router-link
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="underline">
+        <div :class="[container ? 'complete' : '', 'day']">
+          <div class="form-control">
+            <router-link
+              :to="{ name: 'Home', params: { user: 'Kris' } }"
+              class="form-control linkKris"
+            >
+              Kris</router-link
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,6 +82,14 @@ export default {
   color: white;
   text-decoration: none;
 }
+.linkAbbie {
+  color: white;
+  text-decoration: none;
+}
+.linkKris {
+  color: white;
+  text-decoration: none;
+}
 .linkTanner:hover {
   background: -webkit-linear-gradient(45deg, #ff2525, #ffe53b);
   -webkit-background-clip: text;
@@ -60,6 +97,16 @@ export default {
 }
 .linkErin:hover {
   background: -webkit-linear-gradient(45deg, #ff2cdf, #0014ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.linkAbbie:hover {
+  background: -webkit-linear-gradient(45deg, #22cb2d, #0014ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.linkKris:hover {
+  background: -webkit-linear-gradient(45deg, #c53a3a, #0014ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -113,10 +160,10 @@ label {
 }
 .container {
   max-width: 98%;
-  margin: 30px auto;
+  margin: 20px auto;
   padding: 30px;
   border-radius: 5px;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 .underline:after {
