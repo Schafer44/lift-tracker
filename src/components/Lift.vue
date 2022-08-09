@@ -30,7 +30,6 @@
         </div>
       </div>
     </td>
-
     <div v-if="this.editMode === true">
       <td class="secondTd">
         <form @submit="$emit('on-Submit-delete-lift', lift, $event)">
